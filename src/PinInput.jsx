@@ -65,15 +65,21 @@ class PinInput extends Component {
     }
   }
 
+  onEnter() {
+    const pin = this.values.join('');
+    this.props.onEnter(pin);
+  }
+
   render() {
     return (
-      <div style={this.props.style}  className='pincode-input-container'>
+      <div style={this.props.style} className='pincode-input-container'>
         {this
           .values
           .map((e, i) => <PinItem
             ref={ n => (this.elements[i] = n) }
             key={ i }
             onBackspace={ () => this.onBackspace(i) }
+            onEnter={ () => this.onEnter() }
             secret={ this.props.secret || false }
             onChange={ v => this.onItemChange(v, i) }
             type={ this.props.type }
@@ -96,6 +102,7 @@ PinInput.propTypes = {
   secret: PropTypes.bool,
   focus: PropTypes.bool,
   onChange: PropTypes.func,
+  onEnter: PropTypes.func,
   inputMode: PropTypes.string,
   style: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   inputStyle: PropTypes.object, // eslint-disable-line react/forbid-prop-types
@@ -109,6 +116,7 @@ PinInput.defaultProps = {
   focus: false,
   onChange: () => {},
   onComplete: () => {},
+  onEnter: () => {},
   inputMode: undefined,
   style: {},
   inputStyle: {},

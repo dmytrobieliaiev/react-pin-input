@@ -801,6 +801,12 @@ var PinInput = function (_Component) {
       }
     }
   }, {
+    key: 'onEnter',
+    value: function onEnter() {
+      var pin = this.values.join('');
+      this.props.onEnter(pin);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -816,6 +822,9 @@ var PinInput = function (_Component) {
             key: i,
             onBackspace: function onBackspace() {
               return _this2.onBackspace(i);
+            },
+            onEnter: function onEnter() {
+              return _this2.onEnter();
             },
             secret: _this2.props.secret || false,
             onChange: function onChange(v) {
@@ -843,6 +852,7 @@ PinInput.propTypes = {
   secret: _propTypes2.default.bool,
   focus: _propTypes2.default.bool,
   onChange: _propTypes2.default.func,
+  onEnter: _propTypes2.default.func,
   inputMode: _propTypes2.default.string,
   style: _propTypes2.default.object, // eslint-disable-line react/forbid-prop-types
   inputStyle: _propTypes2.default.object, // eslint-disable-line react/forbid-prop-types
@@ -855,6 +865,7 @@ PinInput.defaultProps = {
   focus: false,
   onChange: function onChange() {},
   onComplete: function onComplete() {},
+  onEnter: function onEnter() {},
   inputMode: undefined,
   style: {},
   inputStyle: {},
@@ -935,6 +946,9 @@ var PinItem = function (_Component) {
     value: function onKeyDown(e) {
       if (e.keyCode === 8 && (!this.state.value || !this.state.value.length)) {
         this.props.onBackspace();
+      }
+      if (e.keyCode === 13) {
+        this.props.onEnter();
       }
     }
   }, {
@@ -1030,6 +1044,7 @@ var PinItem = function (_Component) {
 PinItem.propTypes = {
   onChange: _propTypes2.default.func.isRequired,
   onBackspace: _propTypes2.default.func.isRequired,
+  onEnter: _propTypes2.default.func.isRequired,
   secret: _propTypes2.default.bool,
   type: _propTypes2.default.string,
   inputMode: _propTypes2.default.string,

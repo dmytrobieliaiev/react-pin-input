@@ -37,6 +37,9 @@ class PinItem extends Component {
     if (e.keyCode === 8 && (!this.state.value || !this.state.value.length)) {
       this.props.onBackspace();
     }
+    if (e.keyCode === 13) {
+      this.props.onEnter();
+    }
   }
 
   clear() {
@@ -115,6 +118,7 @@ class PinItem extends Component {
 PinItem.propTypes = {
   onChange: PropTypes.func.isRequired,
   onBackspace: PropTypes.func.isRequired,
+  onEnter: PropTypes.func.isRequired,
   secret: PropTypes.bool,
   type: PropTypes.string,
   inputMode: PropTypes.string,
